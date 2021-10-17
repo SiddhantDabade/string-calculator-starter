@@ -45,6 +45,25 @@ class StringCalculatorShould {
 			assertThat(StringCalculator.sum("//.\n2.3.1"), is(6));
 		}
 
+    @Rule
+		public ExpectedException expectedException = ExpectedException.none();
+
+	@Test
+		public void throwsOnNegativeNumber() {
+			expectedException.expect(IllegalArgumentException.class);
+			expectedException.expectMessage("negative number: -3");
+
+			StringCalculator.sum("-3");
+		}
+
+	@Test
+		public void throwsOnNegativeNumbersWithAllNumbersInExceptionMessage() {
+			expectedException.expect(IllegalArgumentException.class);
+			expectedException.expectMessage("negative number: -3,-5,-13");
+
+			StringCalculator.sum("1,-3,5,-5,-13");
+		}
+
 
 
 }
